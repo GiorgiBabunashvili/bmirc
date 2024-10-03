@@ -4,37 +4,68 @@ import "./App.css";
 function App() {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
+  const [bmi, setBmi] = useState("");
+  const [message, setMessage] = useState("");
+
+  //logic
+  let calcBMI = (e) => {
+    e.preventDefault();
+
+    if (weight === 0 || height === 0) {
+      alert("Please enter a valid weight and height");
+    } else {
+      let bmi = (weight / (height * height)) * 703;
+      setBmi(bmi.toFixed(2));
+
+      if (bmi < 25) {
+        setMessage("you are underweight");
+      } else if (bmi >= 25 && bmi < 30) {
+        setMessage("you are a healtly wight");
+      } else {
+        setMessage("you are overweight");
+      }
+    }
+  };
+
+  //reload
+  let relaod = () => {
+    window.location.reload();
+  };
 
   return (
-    <div>
+    <div className="app">
       <div className="container">
         <h2>BMI Calculator</h2>
-        <form>
+        <form onSubmit={calcBMI}>
           <div>
-            <label>Weight (ibs)</label>
+            <label>Weight</label>
             <input
               type="text"
               placeholder="Enter Weight value"
               value={weight}
+              onChange={(e) => setWeight(e.target.value)}
             />
           </div>
           <div>
-            <label>Height (in)</label>
+            <label>Height</label>
             <input
               type="text"
               placeholder="Enter Height value"
               value={height}
+              onChange={(e) => setHeight(e.target.value)}
             />
           </div>
           <div>
             <button className="btn" type="submit">
               Submit
             </button>
-            <button className="btn btn-outline">Reload</button>
+            <button className="btn btn-outline" onClick={relaod} type="reset">
+              Reload
+            </button>
           </div>
           <div className="center">
-            <h3>Your BMI is: BMI</h3>
-            <p>MESSAGE</p>
+            <h3>Your BMI is: {bmi}</h3>
+            <p>{message}</p>
           </div>
         </form>
       </div>
