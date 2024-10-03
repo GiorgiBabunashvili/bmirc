@@ -1,6 +1,10 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+
   return (
     <div>
       <div className="container">
@@ -8,11 +12,19 @@ function App() {
         <form>
           <div>
             <label>Weight (ibs)</label>
-            <input type="text" placeholder="Enter Weight value" />
+            <input
+              type="text"
+              placeholder="Enter Weight value"
+              value={weight}
+            />
           </div>
           <div>
-            <label>Height (ibs)</label>
-            <input type="text" placeholder="Enter Height value" />
+            <label>Height (in)</label>
+            <input
+              type="text"
+              placeholder="Enter Height value"
+              value={height}
+            />
           </div>
           <div>
             <button className="btn" type="submit">
